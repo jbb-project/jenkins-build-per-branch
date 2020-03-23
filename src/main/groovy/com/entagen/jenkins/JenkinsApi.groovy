@@ -204,7 +204,7 @@ class JenkinsApi {
             }
         }
 
-        headers = [:]
+        def headers = [:]
         if (crumbInfo) {
             headers[crumbInfo.field] = crumbInfo.crumb
             println "Passing crumbInfo into params: ${headers}"
