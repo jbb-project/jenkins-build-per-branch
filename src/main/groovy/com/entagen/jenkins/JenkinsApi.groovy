@@ -223,6 +223,7 @@ class JenkinsApi {
 
         if (requestInterceptor) {
             http.client.addRequestInterceptor(this.requestInterceptor)
+            println "adding interceptor to http client"
         }
 
         Integer status = HttpStatus.SC_EXPECTATION_FAILED
