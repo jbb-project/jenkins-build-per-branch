@@ -35,7 +35,7 @@ class JenkinsApi {
                 httpRequest.addHeader('Authorization', 'Basic ' + auth.bytes.encodeBase64().toString())
                 if (crumbInfo) {
                     httpRequest.addHeader(crumbInfo.field, crumbInfo.crumb)
-                    println "Passing crumbInfo into headers: ${httpRequest}, ${crumbInfo}, ${crumbInfo.field}, ${crumbInfo.crumb}"
+                    println "Passing crumbInfo into headers"
                 }
             }
         }
@@ -223,7 +223,6 @@ class JenkinsApi {
 
         if (requestInterceptor) {
             http.client.addRequestInterceptor(this.requestInterceptor)
-            println "adding interceptor to http client"
         }
 
         Integer status = HttpStatus.SC_EXPECTATION_FAILED
