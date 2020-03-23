@@ -206,7 +206,7 @@ class JenkinsApi {
 
         if (crumbInfo) {
             params[crumbInfo.field] = crumbInfo.crumb
-            println "Passing crumbInfo into params"
+            println "Passing crumbInfo into params: ${params}"
         }
 
 
@@ -230,7 +230,6 @@ class JenkinsApi {
 
         http.post(path: path, body: postBody, query: params,
                 requestContentType: contentType) { resp ->
-            println "Params: ${params}"
             assert resp.statusLine.statusCode < 400
             status = resp.statusLine.statusCode
         }
