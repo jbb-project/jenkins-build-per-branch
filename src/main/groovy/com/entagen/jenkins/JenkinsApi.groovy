@@ -33,6 +33,10 @@ class JenkinsApi {
             void process(HttpRequest httpRequest, HttpContext httpContext) {
                 def auth = jenkinsServerUser + ':' + jenkinsServerPassword
                 httpRequest.addHeader('Authorization', 'Basic ' + auth.bytes.encodeBase64().toString())
+                if (crumbInfo) {
+                    httpRequest.addHeader(crumbInfo.field, crumbInfo.crumb)
+                  println "Passing crumbInfo into headers"
+                }
             }
         }
 
@@ -206,8 +210,8 @@ class JenkinsApi {
 
         def headers = [:]
         if (crumbInfo) {
-            headers[crumbInfo.field] = crumbInfo.crumb
-            println "Passing crumbInfo into params: ${headers}"
+            params[crumbInfo.field] = crumbInfo.crumb
+            println "Passing crumbInfo into params"
         }
 
 
@@ -230,7 +234,7 @@ class JenkinsApi {
         }
 
         http.post(path: path, body: postBody, query: params,
-                requestContentType: contentType, headers: headers) { resp ->
+                requestContentType: contentType) { resp ->
             assert resp.statusLine.statusCode < 400
             status = resp.statusLine.statusCode
         }
