@@ -35,7 +35,7 @@ class JenkinsApi {
                 httpRequest.addHeader('Authorization', 'Basic ' + auth.bytes.encodeBase64().toString())
                 if (crumbInfo) {
                     httpRequest.addHeader(crumbInfo.field, crumbInfo.crumb)
-                  println "Passing crumbInfo into headers"
+                    println "Passing crumbInfo into headers: ${httpRequest.headers}"
                 }
             }
         }
